@@ -2,14 +2,12 @@
 #include <WebServer.h>
 #include <LittleFS.h>
 
-// Credenciales de la red que creará el ESP32-C3
 const char* ssid = "ESP32-C3-AP";
-const char* password = "";  // Red abierta
+const char* password = "";
 
 #define RE 8
 #define DE 7
 
-// Pines para el puerto Serial Modbus
 #define RX_PIN 4  // RO
 #define TX_PIN 5  // DI
 
@@ -19,10 +17,8 @@ byte values[11];
 HardwareSerial mod(1);
 WebServer server(80);
 
-// Variable global inicializada
 float soil_ph = 0.0;
 
-// FUNCIÓN DE AUTO-CREACIÓN: Escribe tu HTML exacto directamente en la Flash si no existe
 void autoCrearHTML() {
   File file = LittleFS.open("/index.html", "w");
   if (!file) {
@@ -98,14 +94,12 @@ void setup() {
 
   Serial.println("PH Meter Inicializado en ESP32-C3...");
 
-  // Inicializar LittleFS (el 'true' formatea la partición si está vacía)
   if (!LittleFS.begin(true)) {
     Serial.println("Error al montar LittleFS");
     return;
   }
   Serial.println("LittleFS montado correctamente.");
 
-  // COMPROBACIÓN DE ARCHIVO: Si no existe, el ESP32 lo fabrica solo
   if (!LittleFS.exists("/index.html")) {
     Serial.println("index.html faltante detectado. Iniciando auto-creacion...");
     autoCrearHTML();
