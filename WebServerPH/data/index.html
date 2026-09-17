@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>ESP32-C3 AJAX</title>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    .card {
+      background: rgb(182, 192, 183);
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #0066cc;
+    }
+
+    .valor {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ff5500;
+    }
+  </style>
+
+    <script>
+    setInterval(function() {
+      fetch('/leerPH')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('ph').innerText = data;
+        })
+        .catch(err => console.error('Error al leer datos:', err));
+    }, 1000);
+  </script>
+
+</head>
+
+<body>
+  <div class='card'>
+    <h1>ESP32-C3 PH SOIL</h1>
+    <p>El valor del PH es:</p>
+    <div class='valor' id='ph'>...</div>
+  </div>
+</body>
+
+</html>
