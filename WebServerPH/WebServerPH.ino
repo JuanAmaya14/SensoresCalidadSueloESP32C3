@@ -92,7 +92,8 @@ void setup() {
   pinMode(RE, OUTPUT);
   pinMode(DE, OUTPUT);
 
-  Serial.println("PH Meter Inicializado en ESP32-C3...");
+  Serial.println("PH Meter Inicializado en ESP32-C3...");uv sync
+
 
   if (!LittleFS.begin(true)) {
     Serial.println("Error al montar LittleFS");
